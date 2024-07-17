@@ -16,6 +16,7 @@ def create_file(file_name):
     except EOFError as e:
         print(f'Error: {e}')
     finally:
+        f.close()
         print('In finally block which always executes no matter what')
 
 
@@ -37,6 +38,7 @@ def read_file(file_name):
     except EOFError as e:
         print(f'Error: {e}')
     finally:
+        f.close()
         print('In finally block which always executes no matter what')
 
 
@@ -58,6 +60,7 @@ def append_file(file_name, text):
     except EOFError as e:
         print(f'Error: {e}')
     finally:
+        f.close()
         print('In finally block which always executes no matter what')
 
 

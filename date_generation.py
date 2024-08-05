@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime, timedelta
 
 
@@ -14,15 +15,27 @@ def generate_dates(start_date_str, end_date_str=''):
         current_date += timedelta(days=1)
 
 
-start_date = '2024-08-02'
-end_date = '2025-01-01'
+def main():
+    parser = argparse.ArgumentParser(description="Generate a range of dates.")
+    parser.add_argument('start_date', type=str, help="Start date in YYYY-MM-DD format")
+    parser.add_argument('--end_date', type=str,
+                        help="End date in YYYY-MM-DD format. If not provided, will generate dates for 4 years from start_date.")
 
-# Date generation for given range
-range_date_generator = generate_dates(start_date, end_date)
-for i in range_date_generator:
-    print(i)
+    args = parser.parse_args()
 
-# Date generation for 4 years
-date_generator = generate_dates(start_date)
-for i in date_generator:
-    print(i)
+    if args.end_date:
+        # Date generation for a given range
+        print(f"Generating dates from {args.start_date} to {args.end_date}:")
+        range_date_generator = generate_dates(args.start_date, args.end_date)
+        for date in range_date_generator:
+            print(date)
+    else:
+        # Date generation for 4 years
+        print(f"Generating dates from {args.start_date} for 4 years:")
+        date_generator = generate_dates(args.start_date)
+        for date in date_generator:
+            print(date)
+
+
+if __name__ == "__main__":
+    main()
